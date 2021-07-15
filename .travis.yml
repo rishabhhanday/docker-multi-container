@@ -8,12 +8,11 @@ script:
   - docker run -e CI=true rishabhhanday/react-test npm run test
 after_success:
   - docker build -t rishabhhanday/multi-client ./client
-  - docker build -t rishabhhanday/multi-client ./server
+  - docker build -t rishabhhanday/multi-server ./server
   - docker build -t rishabhhanday/multi-worker ./worker
   - docker build -t rishabhhanday/multi-nginx ./nginx
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push rishabhhanday/multi-client 
   - docker push rishabhhanday/multi-server 
   - docker push rishabhhanday/multi-nginx 
-  - docker push rishabhhanday/multi-server 
   - docker push rishabhhanday/multi-worker
